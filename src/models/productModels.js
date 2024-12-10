@@ -1,15 +1,16 @@
-//manipulacion de datos en la DB
-//retorna esta peticion en la base de datos al controller.
-import mongoose, { mongo } from "mongoose";
+import { Schema, model } from "mongoose";
 
-const productSchema = new mongoose.Schema({
+const productSchema = new Schema({
     name: { type: String },
+    brand: { type: String },
+    harvest: { type: Number },
+    variety: { type: String },
     price: { type: Number },
     description: { type: String },
     stock: { type: Number },
 })
 
-const Product = mongoose.model("products", productSchema);
+const Product = model("products", productSchema);
 
 const getAllProducts = () => {
    return Product.find();
@@ -21,8 +22,7 @@ const getProductById = (id) => {
 
 const createProduct = (newProduct) => {
     const product = new Product(newProduct);
-    const saveProduct = product.save();
-    return saveProduct;
+    return product.save();
 }
 
 const updateProduct = (id, updateProduct) => {

@@ -1,22 +1,18 @@
-//1. recibir el inputo
-//2. responderle al cliente con los diferentes casos(exito y no exito)
-
 import productModels from "../models/productModels.js"
-console.log(productModels);
 
 const getAllProducts = async (req, res) => {
     try {
-        const products = await ProductModels.getAllProducts();
+        const products = await productModels.getAllProducts();
         res.json(products);
     } catch (error) {
         res.status(500).json({ error: "server error" });
     }
 }
 
-const getProductById = (req, res) => {
+const getProductById = async (req, res) => {
     try {
         const { id } = req.params;
-        const product = ProductModels.getProductById(id);
+        const product = await productModels.getProductById(id);
 
         if(!product) res.status(404).json({ error: "product not found" });
         res.json(product);
@@ -34,7 +30,7 @@ const createProduct = async (req, res) => {
             res.status(400).json({ error: "bad request, invalid data" });
         };
 
-        const newProduct = await ProductModels.createProduct({ name, price, description, stock });
+        const newProduct = await productModels.createProduct({ name, price, description, stock });
         res.status(201).json(newProduct);
 
     } catch (error) {
@@ -46,7 +42,7 @@ const updateProduct = async (req, res) => {
     try {
         const { id } = req.params;
         const { body } = req;
-        const product = await ProductModels.updateProduct(id, body);
+        const product = await productModels.updateProduct(id, body);
 
         if(!product) res.status(404).json({ error: "product not found" });
         res.json("deleted product");
@@ -58,7 +54,7 @@ const updateProduct = async (req, res) => {
 const deleteProduct = async (req, res) => {
     try {
         const { id } = req.params;
-        const product = await ProductModels.deleteProduct(id);
+        const product = await productModels.deleteProduct(id);
 
         if(!product) res.status(404).json({ error: "product not found" });
         res.json("deleted product");
