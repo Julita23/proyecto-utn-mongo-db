@@ -3,49 +3,49 @@ import { Schema, model } from "mongoose";
 const wineSchema = new Schema({
     name: { 
         type: String, 
-        required: [true, "El nombre del vino es obligatorio"], 
+        required: [true, "The name of the wine is mandatory"], 
         trim: true,
-        minlength: [3, "El nombre debe tener al menos 3 caracteres"], 
-        maxlength: [100, "El nombre no puede exceder los 100 caracteres"] 
+        minlength: [3, "The name must be at least 3 characters"], 
+        maxlength: [100, "The name cannot exceed 100 characters"] 
     },
     brand: { 
         type: String, 
-        required: [true, "La marca del vino es obligatoria"], 
+        required: [true, "The wine brand is mandatory"], 
         trim: true,
-        maxlength: [50, "La marca no puede exceder los 50 caracteres"] 
+        maxlength: [50, "The mark cannot exceed 50 characters"] 
     },
     harvest: { 
         type: Number, 
-        required: [true, "El año de cosecha es obligatorio"], 
-        min: [1900, "El año de cosecha no puede ser anterior a 1900"], 
-        max: [new Date().getFullYear(), "El año de cosecha no puede ser en el futuro"] 
+        required: [true, "Harvest year is mandatory"], 
+        min: [1900, "The harvest year cannot be before 1900"], 
+        max: [new Date().getFullYear(), "The harvest year cannot be in the future"] 
     },
     variety: { 
         type: String, 
-        required: [true, "La variedad del vino es obligatoria"], 
+        required: [true, "The variety of wine is mandatory"], 
         trim: true,
         enum: {
             values: ["Cabernet Sauvignon", "Merlot", "Chardonnay", "Pinot Noir", "Syrah", "Malbec"],
-            message: "La variedad debe ser una de las siguientes: Cabernet Sauvignon, Merlot, Chardonnay, Pinot Noir, Syrah, Malbec"
+            message: "The variety must be one of the following: Cabernet Sauvignon, Merlot, Chardonnay, Pinot Noir, Syrah, Malbec"
         }
     },
     price: { 
         type: Number, 
-        required: [true, "El precio es obligatorio"], 
-        min: [0, "El precio no puede ser negativo"] 
+        required: [true, "The price is mandatory"], 
+        min: [0, "The price cannot be negative"] 
     },
     description: { 
         type: String, 
         trim: true,
-        maxlength: [500, "La descripción no puede exceder los 500 caracteres"] 
+        maxlength: [500, "Description cannot exceed 500 characters"] 
     },
     stock: { 
         type: Number, 
-        required: [true, "El stock es obligatorio"], 
-        min: [0, "El stock no puede ser negativo"], 
+        required: [true, "Stock is required"], 
+        min: [0, "Stock cannot be negative"], 
         validate: {
             validator: Number.isInteger,
-            message: "El stock debe ser un número entero"
+            message: "Stock must be an integer"
         }
     },
 }, {
